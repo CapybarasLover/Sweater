@@ -10,12 +10,20 @@ import java.util.Map;
 public class GreetingController {
 
     @GetMapping("/greeting")
-    public String greeting(
+    public String greetingPage(
             @RequestParam(name="name", defaultValue="World", required = false)
             String name,
             Map<String, Object> model
     ){
         model.put("name", name);
         return "greeting";
+    }
+
+    @GetMapping("/main")
+    public String mainPage(
+            Map<String, Object> model
+    ){
+        model.put("main", "main");
+        return "main";
     }
 }
