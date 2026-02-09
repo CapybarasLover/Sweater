@@ -8,6 +8,7 @@ import java.util.Map;
 
 @Controller
 public class GreetingController {
+    
     @GetMapping("/greeting")
     public String greetingPage(
             @RequestParam(name="name", defaultValue="World", required = false)
