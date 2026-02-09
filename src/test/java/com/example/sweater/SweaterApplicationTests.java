@@ -1,4 +1,4 @@
-package com.example.sweater;
+package com.example.Sweater;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
