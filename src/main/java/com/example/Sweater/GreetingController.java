@@ -23,7 +23,7 @@ public class GreetingController {
     public String mainPage(
             Map<String, Object> model
     ){
-        model.put("main", "main");
+        model.put("main", "Sweater main");
         return "main";
     }
 }
