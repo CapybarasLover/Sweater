@@ -10,7 +10,8 @@
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>Sweater</artifactId>
-	<version>0.0.1</version>
+<!--не забывать!-->
+	<version>0.0.1</version> <!-- задаем версию приложения (важно чтобы она совпадала с версией в compose файле) -->
 	<name>Sweater</name>
 	<description>Sprin boot learning project</description>
 	<url/>

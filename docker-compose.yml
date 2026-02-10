@@ -3,14 +3,13 @@ services:
   backend:
     env_file:
       - .env
-    environment:
-      version: $${APP_VERSION}
     image: sweater-backend
     build:
       context: .
-      args:
-        - APP_VERSION=version
-
+      args:  # задаем версию приложения (важно чтобы она совпадала с версией в .pom файле)
+        - APP_VERSION=0.0.1
+    ports:
+      - "8080:8080"
 #  db:
 #    container_name: postgres_sweater
 #    image: postgres:latest
