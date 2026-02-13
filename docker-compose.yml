@@ -1,68 +1,73 @@
 version: "3.9"
-services:
-  backend:
-    env_file:
-      - .env
-    image: sweater-backend
-    build:
-      context: .
-      args:  # задаем версию приложения (важно чтобы она совпадала с версией в .pom файле)
-        - APP_VERSION=0.0.1
-    ports:
-      - "8080:8080"
-#  db:
-#    container_name: postgres_sweater
-#    image: postgres:latest
+services: # пока что docker-compose запускает только бд
+#  backend:
 #    env_file:
 #      - .env
-#    environment:
-#      POSTGRES_USER: ${POS                                                                 ьтитьимсьбтюдбидгщз8979TGRES_USER}
-#      POSTGRES_DB: ${POSTGRES_NAME}
-#      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-#    volumes:
-#      - db-data:/var/lib/postgresql
+#    image: sweater-backend
+#    build:
+#      context: .
+#      args:  # задаем версию приложения (важно чтобы она совпадала с версией в .pom файле)
+#        - APP_VERSION=0.0.1
 #    ports:
-#      - "5432:5432"
-#    healthcheck:
-#      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
-#      interval: 10s
-#      timeout: 5s
-#      retries: 5
-#      start_period: 10s
-#    restart: unless-stopped
-#    deploy:
-#      resources:
-#        limits:
-#          cpus: '1'
-#          memory: 512M
+#      - "8080:8080"
+#    depends_on:
+#      db:
+#        condition: service_healthy
 #    networks:
 #      - postgres
-#
-#  pgadmin:
-#    container_name: pgadmin_container
-#    image: dpage/pgadmin4:7.2
-#    environment:
-#      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
-#      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
-#      PGADMIN_CONFIG_SERVER_MODE: "False"
-#    volumes:
-#      - pgadmin-data:/var/lib/pgadmin
-#    ports:
-#      - "5050:80"
-#    restart: unless-stopped
-#    deploy:
-#      resources:
-#        limits:
-#          cpus: '0.5'
-#          memory: 1G
-#    networks:
-#      - postgres
-#
-#
-#volumes:
-#  db-data:
-#  pgadmin-data:
-#
-#networks:
-#  postgres:
-#    driver: bridge
+  db:
+    container_name: postgres_sweater
+    image: postgres:latest
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_NAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - db-data:/var/lib/postgresql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+    networks:
+      - postgres
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4:7.2
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1G
+    networks:
+      - postgres
+
+
+volumes:
+  db-data:
+  pgadmin-data:
+
+networks:
+  postgres:
+    driver: bridge

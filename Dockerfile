@@ -1,4 +1,4 @@
-FROM maven:3.8.8-eclipse-temurin-21-alpine as build
+FROM maven:3.8.8-eclipse-temurin-21-alpine AS build
 
 WORKDIR /build
 
@@ -8,7 +8,7 @@ COPY pom.xml .
 
 RUN mvn clean install -DskipTests
 
-FROM alpine:latest as run
+FROM alpine:latest AS run
 
 LABEL authors="CapyLover"
 
