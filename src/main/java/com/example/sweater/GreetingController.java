@@ -16,17 +16,13 @@ public class GreetingController {
     @Autowired
     private MessageRepo messageRepo;
 
-    @GetMapping("/greeting")
-    public String greetingPage(
-            @RequestParam(name="name", defaultValue="World", required = false)
-            String name,
-            Map<String, Object> model
+    @GetMapping("/")
+    public String greetingPage(Map<String, Object> model
     ){
-        model.put("name", name);
         return "greeting";
     }
 
-    @GetMapping
+    @GetMapping("/main")
     public String mainPage(
             Map<String, Object> model
     ){
@@ -35,7 +31,7 @@ public class GreetingController {
         return "main";
     }
 
-    @PostMapping
+    @PostMapping("/main")
     public String addMessage(@RequestParam String text, @RequestParam String tag, Map<String, Object> model){
         Message message = new Message(text, tag);
 

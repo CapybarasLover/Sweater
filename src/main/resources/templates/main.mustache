@@ -4,15 +4,29 @@
     <title>Main page</title>
 </head>
 <body>
+    <div>
+        <form action="/logout" method="post">
+            <input type="submit" value="Sign Out"/>
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+            <!--    поле, которое передает специальный токен сессии, без этого токена не будут работать формы-->
+        </form>
+    </div>
+
     <form method="post">
         <input type="text" name="text" placeholder="Введите собщение">
         <input type="text" name="tag" placeholder="Тэг">
         <button type="submit">Добавить</button>
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+        <!--    поле, которое передает специальный токен сессии, без этого токена не будут работать формы-->
     </form>
+
     <form method="post" action="filter">
         <input type="text" name="filter">
         <button type="submit">Найти</button>
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+        <!--    поле, которое передает специальный токен сессии, без этого токена не будут работать формы-->
     </form>
+
     <div>Список сообщений</div>
     {{#messages}}
         <b>{{id}}</b>

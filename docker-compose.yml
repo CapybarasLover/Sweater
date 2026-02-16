@@ -1,20 +1,20 @@
 version: "3.9"
 services: # пока что docker-compose запускает только бд
-#  backend:
-#    env_file:
-#      - .env
-#    image: sweater-backend
-#    build:
-#      context: .
-#      args:  # задаем версию приложения (важно чтобы она совпадала с версией в .pom файле)
-#        - APP_VERSION=0.0.1
-#    ports:
-#      - "8080:8080"
-#    depends_on:
-#      db:
-#        condition: service_healthy
-#    networks:
-#      - postgres
+  backend:
+    env_file:
+      - .env
+    image: sweater-backend
+    build:
+      context: .
+      args:  # задаем версию приложения (важно чтобы она совпадала с версией в .pom файле)
+        - APP_VERSION=0.0.1
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - postgres
   db:
     container_name: postgres_sweater
     image: postgres:latest
@@ -22,7 +22,7 @@ services: # пока что docker-compose запускает только бд
       - .env
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_DB: ${POSTGRES_NAME}
+      POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - db-data:/var/lib/postgresql
