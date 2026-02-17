@@ -64,9 +64,11 @@ class WebSecurityConfig {
 
         // Настраиваем кастомные SQL запросы
         users.setUsersByUsernameQuery(
+                // language=SQL
                 "select username, password, active from usr where username=?"
         );
         users.setAuthoritiesByUsernameQuery(
+                // language=SQL
                 "select u.username, ur.roles from usr as u inner join user_role ur on u.id = ur.user_id where u.username=?"
         );
 
